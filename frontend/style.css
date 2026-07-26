@@ -1,0 +1,154 @@
+/* استایل کلی صفحه */
+* {
+  box-sizing: border-box;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #2b1055, #7597de);
+  color: white;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* نوار بالا: سکه و لول */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* نوار گرسنگی */
+.hunger-container {
+  text-align: center;
+}
+.hunger-label {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+.hunger-bar-bg {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 14px;
+  overflow: hidden;
+}
+.hunger-bar-fill {
+  height: 100%;
+  background: #ff7043;
+  width: 100%;
+  transition: width 0.3s;
+}
+
+/* ناحیه‌ی گربه */
+.cat-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px;
+}
+.cat {
+  font-size: 120px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s;
+}
+.cat:active {
+  transform: scale(0.85);
+}
+.meow-text {
+  position: absolute;
+  top: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+}
+#floatingPoints {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.floating-point {
+  position: absolute;
+  font-weight: bold;
+  color: #ffd54f;
+  animation: floatUp 0.8s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-60px); opacity: 0; }
+}
+
+/* نوار تجربه */
+.xp-bar-bg {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  height: 100%;
+  background: #66bb6a;
+  width: 0%;
+  transition: width 0.3s;
+}
+
+/* دکمه‌های عمومی */
+.action-btn {
+  background: #ff7043;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.action-btn:active {
+  opacity: 0.8;
+}
+
+/* بخش کازینو */
+.casino {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+}
+.casino h3 {
+  margin-top: 0;
+}
+#betAmount {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+.casino-btn {
+  background: #ab47bc;
+  width: 100%;
+}
+#casinoResult {
+  margin-top: 10px;
+  font-weight: bold;
+  min-height: 20px;
+}
