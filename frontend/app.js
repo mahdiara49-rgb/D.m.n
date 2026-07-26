@@ -29,7 +29,10 @@ const floatingPointsEl = document.getElementById('floatingPoints');
 const feedBtn = document.getElementById('feedBtn');
 const betBtn = document.getElementById('betBtn');
 const betAmountEl = document.getElementById('betAmount');
-const casinoResultEl = document.getElementById('casinoResult');
+const casinoResultEl = document.getElementById('casinoResult');const reel1 = document.getElementById('reel1');
+const reel2 = document.getElementById('reel2');
+const reel3 = document.getElementById('reel3');
+const SLOT_SYMBOLS = ['🍒', '🍋', '🍇', '⭐', '7️⃣'];
 
 function loadUser() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -143,6 +146,25 @@ feedBtn.addEventListener('click', () => {
   renderUser();
 });
 
+function spinReels(onDone) {
+  const reels = [reel1, reel2, reel3];
+  reels.forEach((r) => r.classList.add('spinning'));
+
+  // چرخش سریع و تصادفی برای مدت کوتاه
+  const spinInterval = setInterval(() => {
+    reels.forEach((r) => {
+      r.textContent = SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)];
+    });
+  }, 80);
+
+  // بعد از ۱.۲ ثانیه، نتیجه نهایی رو مشخص کن
+  setTimeout(() => {
+    clearInterval(spinInterval);
+    reels.forEach((r) => r.classList.remove('spinning'));
+    onDone();
+  }, 1200);
+}
+
 betBtn.addEventListener('click', () => {
   const betAmount = parseInt(betAmountEl.value, 10);
   if (!betAmount || betAmount <= 0) {
@@ -154,15 +176,37 @@ betBtn.addEventListener('click', () => {
     return;
   }
 
-  const won = Math.random() < WIN_CHANCE;
-  user.coins += won ? betAmount : -betAmount;
+  betBtn.disabled = true;
+  casinoResultEl.textContent = 'در حال چرخش...';
 
-  saveUser(user);
-  casinoResultEl.textContent = won
-    ? `🎉 بردی! +${betAmount} سکه`
-    : `😿 باختی! -${betAmount} سکه`;
+  spinReels(() => {
+    // نتیجه نهایی: هر سه چرخ یه سمبل تصادفی می‌گیرن
+    const result = [0, 0, 0].map(
+      () => SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)]
+    );
+    reel1.textContent = result[0];
+    reel2.textContent = result[1];
+    reel3.textContent = result[2];
 
-  renderUser();
+    const allMatch = result[0] === result[1] && result[1] === result[2];
+    // برد بزرگ اگه هر سه یکی باشن، وگرنه بر اساس شانس معمولی می‌بازی/می‌بری
+    const won = allMatch || Math.random() < WIN_CHANCE * 0.5;
+    const winMultiplier = allMatch ? 3 : 1;
+
+    user.coins += won ? betAmount * winMultiplier : -betAmount;
+    saveUser(user);
+
+    if (allMatch) {
+      casinoResultEl.textContent = `🎉🎉 برد بزرگ! +${betAmount * winMultiplier} سکه`;
+    } else if (won) {
+      casinoResultEl.textContent = `🎉 بردی! +${betAmount} سکه`;
+    } else {
+      casinoResultEl.textContent = `😿 باختی! -${betAmount} سکه`;
+    }
+
+    renderUser();
+    betBtn.disabled = false;
+  });
 });
 
 renderUser();
