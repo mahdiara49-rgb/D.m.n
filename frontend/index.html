@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>بازی گربه‌ای</title>
+
+  <!-- این اسکریپت رو تلگرام می‌ده تا بتونیم داخل اپ تلگرام کار کنیم -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- بالای صفحه: اطلاعات کاربر -->
+    <div class="top-bar">
+      <div class="stat">💰 <span id="coins">0</span></div>
+      <div class="stat">⭐ لول <span id="level">1</span></div>
+    </div>
+
+    <!-- نوار گرسنگی -->
+    <div class="hunger-container">
+      <div class="hunger-label">🍖 گرسنگی</div>
+      <div class="hunger-bar-bg">
+        <div id="hungerBar" class="hunger-bar-fill"></div>
+      </div>
+    </div>
+
+    <!-- خود گربه -->
+    <div class="cat-area">
+      <div id="cat" class="cat">🐱</div>
+      <div id="meowText" class="meow-text"></div>
+      <div id="floatingPoints"></div>
+    </div>
+
+    <!-- نوار تجربه (پیشرفت لول) -->
+    <div class="xp-bar-bg">
+      <div id="xpBar" class="xp-bar-fill"></div>
+    </div>
+
+    <!-- دکمه غذا دادن -->
+    <button id="feedBtn" class="action-btn">🍗 غذا دادن (۱۰ سکه)</button>
+
+    <!-- بخش کازینو -->
+    <div class="casino">
+      <h3>🎰 شانس و کازینو</h3>
+      <input id="betAmount" type="number" placeholder="مقدار شرط" min="1" />
+      <button id="betBtn" class="action-btn casino-btn">شرط‌بندی</button>
+      <div id="casinoResult"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
