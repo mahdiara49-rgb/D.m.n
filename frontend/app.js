@@ -3,8 +3,7 @@
 // گرفتن اطلاعات کاربر، تپ روی گربه، غذا دادن، و کازینو
 
 // آدرس بک‌اند رو اینجا بذار (بعد از دیپلوی روی Railway/Render آپدیتش کن)
-const API_URL = 'https://YOUR-BACKEND-URL.up.railway.app';
-
+const API_URL = 'https://dmn-production-093e.up.railway.app';
 // راه‌اندازی تلگرام وب‌اپ
 const tg = window.Telegram?.WebApp;
 if (tg) {
